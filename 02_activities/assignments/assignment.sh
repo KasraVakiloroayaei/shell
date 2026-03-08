@@ -9,6 +9,13 @@ set -x
 # project name and a brief description of the project.
 # Then it unzips the raw data provided by the client.
 
+if [ -d newproject ]; then
+  echo "Recreating the newproject directory"
+  rm -rf newproject
+fi
+mkdir newproject
+cd newproject
+
 mkdir analysis output
 touch README.md
 touch analysis/main.py
@@ -23,12 +30,17 @@ unzip -q rawdata.zip
 # 1. Create a directory named data
 mkdir data
 
+
 # 2. Move the ./rawdata directory to ./data/raw
 mv rawdata raw #Renamed rawdata to raw
 mv raw data/ #Moved raw to data
 
+# 2. Move the ./rawdata directory to ./data/raw (eg. move it into ./data and rename it to raw)
+
+
 # 3. List the contents of the ./data/raw directory
 ls data/raw
+
 
 # 4. In ./data/processed, create the following directories: server_logs, user_logs, and event_logs
 mkdir data/processed
@@ -38,6 +50,7 @@ mkdir user_logs
 mkdir event_logs
 
 cd ../.. # Go to where assignment.sh is located on any device 
+
 
 # 5. Copy all server log files (files with "server" in the name AND a .log extension) from ./data/raw to ./data/processed/server_logs
 cp data/raw/*server*.log data/processed/server_logs
